@@ -1,0 +1,35 @@
+Controller层中实现POST/GET请求的转发
+用注解@Controller标记
+前端发送请求后由Controller层接收（接收到Json格式）
+在Controller层中调用Service层的方法返回返回值（返回的是一个Json格式），Controller层将返回值返回前端（发送的是Json格式）
+作用仅仅是接收请求，并将这个对象发送到Service层调用Service方法
+
+目前Controller实现请求转发基于REST API
+常见的注解：
+
+1 @controller：controller的作用就是servlet，用于转发前端后台间的请求，注解在声名处。
+
+2 @RestController：（REST特有）Spring4.X中同于替代@Controller的注解，可以省去在类方法处注解@ResponseBody，即类方法都会将返回值发送到客户端。
+
+以下标记在方法
+
+3 @RequestMapping(value="/xx", method=RequestMethod.POST, consumes="application/json" )
+声名在类方法处，说明映射地址，方法以及content-Type的头部信息，如果写了头部信息则只会在严格符合条件的情况下调用该方法，否则选择其他方法处理该请求，可以不写头部信息由注解@RequestBody查找消息转换器。
+
+4 @ResponseBody，（REST特有）声名在类方法public之后即
+public @ResponseBody 返回值 方法名 （参数）{return xx}
+如果没有这个注解此方法就是一个普通方法，添加此注解之后，Spring会将方法返回值xx作为资源发送给客户端，并自动查找消息转换器转为客户端可以接受的头部信息，如上述2所说，如果类声名RestController，则可以省去此注解。
+
+以下标记在方法参数上以获取前台数据
+
+5 @RequestBody，（REST特有）声名在类方法参数之前即
+public @ResponseBody 返回值类型 方法名 （@RequestBody 参数类型 参数）{return xxx;}
+此注解在于Spring会查看请求中Content-Type头部信息，查找可以转换为参数类型的转换器。如3所说，如果设置了consumes参数则这一注解将失去作用，常用于处理POST中Content-Type不是application/x-www-form-urlencoded编码的内容，例如application/json, application/xml等。
+
+6 @RequestParam：同样声名在类方法参数之前，即
+（@RequestParam（value=“key”,defaultValue=xx）参数类型 参数名）
+用于获取传递来的key的值，defaultValue的作用是若前台发送的为空则使用这个默认值，可以处理GET方式中queryString的值，也可以处理POST方式中 body data的值，用来处理Content-Type: 为 application/x-www-form-urlencoded编码的内容（提交的消息主题是k:v&k:v形式的String），提交方式GET、POST；
+
+7 @PathVariable:和@RequestParam的作用大致一样
+ public String edit(Model model, @PathVariable long id,@PathVariable  String name) {}
+区别在于@PathVariable是基于URL占位符,所以要求参数变量名name和key是一致的，如果不一致则需要@PathVariable("name")指定，这个基于动态URL所以只能用于GET方法。

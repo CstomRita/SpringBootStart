@@ -1,0 +1,2 @@
+在实体类中定义Bean对象的配置类及其类中的get set方法
+利用注解@Configuration标注是Bean的配置类
