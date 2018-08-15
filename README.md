@@ -1,13 +1,13 @@
-# SpringBootStart
+## SpringBootStart
 SpringBootMaven项目配置(包括必要的Maven依赖等等)
 
-創建選擇Spring Initalizer工程，添加Web下web模塊
+# 創建選擇Spring Initalizer工程，添加Web下web模塊
 
 group cn.cst（公司包裝等）
 
 artifact 工程名
 
-提供了必要的配置信息：
+# 提供了必要的配置信息：
 
 1 SpringBoot的唯一配置文件就是main/resource下的application.properties（yml）文件在其中配置mybatis,連接池等信息
 
@@ -19,7 +19,7 @@ artifact 工程名
 
 
 
-調用SQL語句執行過程：
+# 調用SQL語句執行過程：
 
  1 mapper下的接口方法通過和xml文件的映射獲取SQL語句
  
