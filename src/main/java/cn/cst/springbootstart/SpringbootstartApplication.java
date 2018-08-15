@@ -18,7 +18,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 @MapperScan("cn.cst.springbootstart.mapper")
 public class SpringbootstartApplication {
     private static Logger logger = Logger.getLogger(SpringbootstartApplication.class);
-
+    //基於Mybatis的配置：DataSource + SQLSessionFactory
     //DataSource配置
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
@@ -41,7 +41,9 @@ public class SpringbootstartApplication {
     }
 
     /**
-     * Main Start
+     * SpringBoot以一個*Application的入口類，入口類中一個main方法
+     * Main Start,標誌java應用入口的方法
+     * 調用main方法啟動springboot應用
      */
     public static void main(String[] args) {
         SpringApplication.run(SpringbootstartApplication.class, args);

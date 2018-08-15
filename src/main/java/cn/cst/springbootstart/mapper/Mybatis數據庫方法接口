@@ -1,0 +1,13 @@
+在這裡僅僅定義操作數據的方法，定義一個Mybatis接口
+需要實現@Compoent標註,否則在Serviceimpl注入裝配mapper時會報錯
+
+實現方式：
+一 Mapper去查找與之匹配的xml文件，xml文件中定義SQL方法
+    在配置方法上，需要在application.yml中配置mybatis需要映射的文件
+    mybatis.mapper-locations=classpath:mybatis/*.xml
+
+二 不需要xml文件，直接在Mapper方法前加@Select等註解，通過註解定義
+    但是Java 注解对于稍微复杂的语句就会力不从心并且会显得更加混乱。
+    因此，推薦最好使用 XML 来映射语句。
+    在配置方法上，需要在application.yml中配置mybatis自動掃描的包
+    mybatis.type-aliases-package=cn.cst.springbootstart

@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--
+    這裡使用第一種方法，配置xml文件（SQL語句）和Mapper中的接口一一對應
+
+	namespace：必须与对应的接口全类名一致
+	id:必须与对应接口的某个对应的方法名一致
+	parameterType：和方法名對應的參數類型相同
+	resultType：必須和對應的方法返回值相同，如果查詢到了多個結果則返回的是一個List<resultType>
+	resultMap：适合使用返回值是自定义实体类的情况
+	resultType：适合使用返回值得数据类型是非自定义的，即jdk的提供的类型
+
+	在MyBatis进行查询映射时，其实查询出来的每一个属性都是放在一个对应的Map里面的，其中键是列名，值则是其对应的值
+	当提供的返回类型属性是resultType时，MyBatis会将Map里面的键值对取出赋给resultType所指定的对象对应的属性。
+ -->
+
 <mapper namespace="cn.cst.springbootstart.mapper.UserMapper">
 
 
     <select id="findOne" resultType="java.util.HashMap">
-            select * from user
+            select * from User
 
     </select>
 

@@ -1,17 +1,15 @@
 # SpringBootStart
 SpringBootMaven项目配置(包括必要的Maven依赖等等)
+創建選擇Spring Initalizer工程，添加Web下web模塊
+group cn.cst（公司包裝等）
+artifact 工程名
+提供了必要的配置信息：
+1 SpringBoot的唯一配置文件就是main/resource下的application.properties（yml）文件在其中配置mybatis,連接池等信息
+2 在Application入口處配置構建SQLsession的相關代碼
+3 resources下構建mybatis文件夾存放映射的mapper.xml
+4 pom.xml必要的jar包
 
-以后构建SpringBoot项目可以直接down下此文件，再修改必要的工程信息即可
-
-1 pom.xml文件内修改GroupId ArtifactId 以及 filename
-
-2 在java目录下重命名包名称groupId.ArtifactId
-
-3 在Idea中右键项目Rename
-
-4 修改项目所在的总文件夹重命名为项目工程
-
-5 关闭Idea重新打开
-
-
-之后在自行java目录下添加代码，省去再次配置的过程
+調用SQL語句執行過程：
+ 1 mapper下的接口方法通過和xml文件的映射獲取SQL語句
+ 2 Service下的具體實現類serviceimpl通過@autowired自動裝配mapper對象，調用mapper.方法；並未serviceimpl創建對外接口service
+ 3 Controller通過@autowired裝配service對象，調用service.方法獲取數據庫SQL語句結果
